@@ -455,7 +455,10 @@ window.PKGS = [
     ['이동','00:30 다낭 출발 → 06:50 김해 도착','비엣젯 VJ988, 4시간 20분']],
    meals:['-','-','-'], hotel:''}
  ],
- options:[], optionsNote:'노옵션 상품(가이드가 선택관광을 권유할 수 없음).',
+ options:[], optionsNote:'PDF 21쪽 선택관광 표: "이 상품에는 선택관광이 없습니다." 가이드는 선택관광을 권유할 수 없고, 손님이 원해 예외 진행 시 자필 동의서 필요.',
+ notice:['일정표의 \'(옵션가 $○○)\' 표시는 추가 요금이 아닙니다. 다른 일반 상품이라면 선택관광으로 팔렸을 항목을 이 상품에서는 기본 포함한다는 뜻의 \'특전 가치\' 표시입니다.','포함 특전: 바나힐 $70 · 바구니배 $30 · 호이안 야경 $30 · 씨클로 $20 · 한강유람선 $30 (체험 합계 $180) + 스파 + 특식(무제한 삼겹살 특전가 $15, 호이안 현지식 세트 특전가 $10)','따로 낼 돈은 바구니배 뱃사공 매너팁 $1~2 정도. 일정에 빠져도 특전 금액은 환불되지 않습니다.'],
+ cancel:['출발 30일 전까지 취소: 계약금 환급','29~20일 전: 여행경비의 10%','19~11일 전: 여행경비의 15%','10일 전~당일: 여행경비의 100%','출발 10영업일 전 항공·숙박 완납, 이후 취소 시 환불 불가','비엣젯항공은 질병·상해 환불 규정 없음(항공 파이널 이후 질병·상해로 취소해도 수수료 부과)','계약금: 총 경비 200만원 미만이면 20만원, 예약 후 3일 이내 입금','취소 접수는 평일 09:00~18:00 영업일 기준 (토/일/월 출발은 금요일 업무 종료 후 취소 시 당일 취소로 간주)'],
+ cancelPage:21,
  shops:[['노니&침향','BEST노니 등','60분'],['보석잡화 또는 라텍스','ABC잡화 등','60분'],['커피','노블레스 등','60분']],
  shopNote:'전 일정 중 2회',
  warn:['최소 6명, 현재 예약 0명 → 5명만으로 출발 미확정','스파가 2일차·4일차 두 번 적혀 있으나 특전 설명은 1곳 → 횟수 확인','선발권 특가: 항공요금 상승 시 가격 인상 가능','특별약관: 출발 10영업일 전 이후 취소 시 환불 불가','비엣젯 수하물 무게 PDF에 없음'],
@@ -590,6 +593,7 @@ function drawDetail(){
   <div class="nm">${esc(p.name)}</div>
   <div class="actions">${pdfLink(p,0,'원본 PDF 열기 ('+p.pdfPages.total+'쪽)')}${pdfLink(p,p.pdfPages.days,'일정표 '+p.pdfPages.days+'쪽부터')}<a class="btn" href="${p.url}" target="_blank" rel="noopener">여행사 페이지 ↗</a></div>
  </div>
+ ${p.notice?`<div class="box" style="background:#eef4ff;border-color:#c9d8f5;margin:12px 0"><h4 style="margin-top:0">💡 '옵션가' 표시 안내 — 추가 요금 아님</h4><ul class="list">${p.notice.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div>`:''}
  <div class="panel"><h3>기본 정보</h3><div class="facts">
   <div class="fact"><b>표시가 (1인)</b><span>${won(p.price)}</span></div>
   <div class="fact"><b>가격 구성</b><span>${esc(p.priceNote)}</span></div>
@@ -618,6 +622,7 @@ function drawDetail(){
   <div class="actions">${pdfLink(p,d.p,d.d+'일차 PDF '+d.p+'쪽')}</div></div></details>`).join('')}
  <div class="panel"><h3>🎟 선택관광 ${p.options.length?'(유료)':''}</h3>${p.options.length?`<div class="tablewrap"><table><thead><tr><th>선택관광</th><th>가격</th><th>소요</th></tr></thead><tbody>${p.options.map(o=>`<tr><td>${esc(o[0])}</td><td>$${o[1]}</td><td>${esc(o[2])}</td></tr>`).join('')}<tr><td><b>합계</b></td><td><b>$${optSum}</b></td><td>약 ${won(optSum*1450)}</td></tr></tbody></table></div>`:''}<p class="mini">${esc(p.optionsNote)}</p></div>
  <div class="panel"><h3>🛍 쇼핑센터 (${esc(p.shopNote)})</h3><div class="tablewrap"><table><thead><tr><th>품목</th><th>장소</th><th>소요</th></tr></thead><tbody>${p.shops.map(s=>`<tr><td>${esc(s[0])}</td><td>${esc(s[1])}</td><td>${esc(s[2])}</td></tr>`).join('')}</tbody></table></div><div class="actions">${pdfLink(p,p.pdfPages.shop,'쇼핑 안내 PDF '+p.pdfPages.shop+'쪽')}</div></div>
+ ${p.cancel?`<div class="panel"><h3>📑 취소 규정 (특별약관)</h3><ul class="list">${p.cancel.map((x,i)=>'<li>'+(i<4?'<b>'+esc(x)+'</b>':esc(x))+'</li>').join('')}</ul><div class="actions">${pdfLink(p,p.cancelPage,'취소 규정 PDF '+p.cancelPage+'쪽')}</div></div>`:''}
  <div class="box warn" style="margin:12px 0"><h4 style="margin-top:0">⚠ 주의</h4><ul class="list">${p.warn.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div>
  <div class="two"><div class="box good"><h4 style="margin-top:0">👍 이 상품의 강점</h4><ul class="list">${p.good.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div><div class="box bad"><h4 style="margin-top:0">👎 약점</h4><ul class="list">${p.bad.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div></div>`;
  store.set('pk-cur',cur);
@@ -637,7 +642,9 @@ function drawAB(){
   ['자유시간','미케비치 30분','1일차 오후 + 2일차 오후 미팅 전까지 + 4일차 오전',2],
   ['마사지','전신 2시간, 팁 별도','스파 120분 + 자쿠지/사우나, 팁 포함',2],
   ['1인실','10만원','15만원',1],
-  ['항공','진에어 (위탁 15kg)','비엣젯 (수하물 확인 필요)',1]
+  ['항공','진에어 (위탁 15kg)','비엣젯 (수하물 확인 필요)',1],
+  ['선택관광','없음 (NO옵션)','없음 — \'옵션가\' 표시는 포함 특전의 가치',0],
+  ['취소 규정','PDF에 없음 → 문의','30일 전 계약금 환급 · 29~20일 10% · 19~11일 15% · 10일 전~ 100%',0]
  ];
  const same=['바나힐(바나산) + 골든브릿지','마블마운틴','바구니배','호이안 구시가 4곳(풍흥의 집·내원교·떤끼의 집·광조회관)','호이안 야경·야시장','미케비치','다낭 대성당','영흥사(67m 관세음보살상)','무제한 삼겹살'];
  const onlyA=['다낭타워 전망 스테이크 디너','다낭 나이트마켓','호이안 전동카','미케 라운지카페 음료','목식당 씨푸드·포시즌 뷔페·노니보쌈'];
@@ -663,7 +670,7 @@ function drawOpts(){
  $('#optBody').innerHTML=P.map(p=>{
   const s=sel[p.id]||[];const sum=p.options.reduce((a,o,i)=>a+(s.includes(i)?o[1]:0),0);
   return `<div class="panel" style="border-top:4px solid ${p.color}"><h3>${p.emoji} ${esc(p.short)} <span class="tag ${p.shopCount>=3?'bad':'warn'}">쇼핑 ${p.shopCount}회</span> ${p.mustUSD?'<span class="tag bad">필수 $'+p.mustUSD+'</span>':'<span class="tag good">필수경비 포함</span>'}</h3>
-  ${p.options.length?p.options.map((o,i)=>`<label class="opt"><input type="checkbox" data-opt="${p.id}" data-i="${i}" ${s.includes(i)?'checked':''}><span>${esc(o[0])} <span class="mini">${esc(o[2])}</span></span><b>$${o[1]}</b></label>`).join('')+`<div class="sum"><span>내가 고른 선택관광</span><span>$${sum} (약 ${won(sum*FX())})</span></div><div class="actions"><button class="btn soft" type="button" data-all="${p.id}">전부 선택</button><button class="btn soft" type="button" data-none="${p.id}">모두 해제</button></div>`:'<p style="margin:0">선택관광 없음 — '+esc(p.optionsNote)+'</p>'}
+  ${p.notice?'<p class="mini" style="background:#eef4ff;border-radius:10px;padding:8px 10px;margin:0 0 8px">💡 '+esc(p.notice[0])+'</p>':''}${p.options.length?p.options.map((o,i)=>`<label class="opt"><input type="checkbox" data-opt="${p.id}" data-i="${i}" ${s.includes(i)?'checked':''}><span>${esc(o[0])} <span class="mini">${esc(o[2])}</span></span><b>$${o[1]}</b></label>`).join('')+`<div class="sum"><span>내가 고른 선택관광</span><span>$${sum} (약 ${won(sum*FX())})</span></div><div class="actions"><button class="btn soft" type="button" data-all="${p.id}">전부 선택</button><button class="btn soft" type="button" data-none="${p.id}">모두 해제</button></div>`:'<p style="margin:0">선택관광 없음 — '+esc(p.optionsNote)+'</p>'}
   <p class="mini" style="margin-top:8px">${p.options.length?esc(p.optionsNote)+' · ':''}쇼핑: ${p.shops.map(x=>esc(x[0])).join(', ')} (${esc(p.shopNote)})</p></div>`}).join('');
 }
 
