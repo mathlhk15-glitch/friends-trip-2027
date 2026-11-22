@@ -116,7 +116,7 @@ td.hi{background:#f2fbf6;font-weight:700}
   <div class="kicker">2027 JANUARY · FRIENDS TRIP HUB</div>
   <h1>우리 겨울여행,<br>후보 6개 한눈에</h1>
   <p>자유여행 2안(시코쿠)과 패키지 4안(장가계·운남·다낭·푸꾸옥)을 같은 기준으로 비교합니다.</p>
-  <div class="hero-row"><b id="dday">D-?</b><span class="chip">✈ 2027.1.16(토) 출발</span><span class="chip">👥 4~5명</span><span class="chip">🗓 기준일 2026.11.22</span></div>
+  <div class="hero-row"><b id="dday">D-?</b><span class="chip">✈ 2027.1.16 출발</span><span class="chip">👥 4~5명</span><span class="chip">🗓 기준일 2026.11.22</span></div>
 </header>
 
 <nav class="jump" aria-label="바로가기">
@@ -203,7 +203,7 @@ td.hi{background:#f2fbf6;font-weight:700}
 
 <script>
 'use strict';
-/* 후보 데이터: 시코쿠·장가계는 기존 상세 페이지(2026.11.19 작성), 패키지 3종은 모두투어 캡처(2026.11.22) */
+/* 후보 데이터: 시코쿠·장가계는 기존 상세 페이지(2026.11.19 작성), 패키지 3종은 여행사 상세 PDF(2026.11.22) */
 const C=[
 {id:'shA',name:'시코쿠 5박 6일',short:'시코쿠 A',emoji:'♨️',color:'#1f6fb2',kind:'자유여행 · 여유형',page:'shikoku-zjj.html',
  price:1311800,priceLabel:'131.2만원',priceNote:'계획서 추정 총액',est:'약 131만원',estLo:1311800,
@@ -223,24 +223,24 @@ const C=[
  core:'천문산·원가계·천자산',free:'단체 일정, 자유 제한',
  risk:'무비자 미확정·최소 6명·쇼핑 3회',riskLv:'bad',certain:false,
  sc:{social:2,nature:5,sea:1,cost:4,rest:1}},
-{id:'yn',name:'운남 5박 6일',short:'운남',emoji:'🏔️',color:'#5b5bd6',kind:'패키지 · 풍경·문화',page:'packages.html',
- price:949900,priceLabel:'95.0만원',priceNote:'표시가 + 옵션·팁 별도 가능성',est:'95만원 + α',estLo:949900,
- dep:'대구',ret:'1/21(목) 20:15 귀국',days:4,dawn:false,local:4.5,
- core:'여강고성·호도협·옥룡설산·인상여강쇼',free:'단체 일정, 고성 저녁 산책',
- risk:'무비자 미확정·최소 6명·옵션 가능성',riskLv:'bad',certain:false,
- sc:{social:3,nature:5,sea:1,cost:3,rest:2}},
-{id:'dn',name:'다낭 3박 5일',short:'다낭',emoji:'🌴',color:'#0e9384',kind:'패키지 · 관광+휴식',page:'packages.html',
- price:789900,priceLabel:'79.0만원',priceNote:'표시가 · 노옵션·노팁 표기',est:'79만원 + 용돈',estLo:789900,
- dep:'김해',ret:'1/20(수) 06:50 새벽 도착',days:2,dawn:true,local:3.5,
- core:'바나힐·호이안·단독 스파',free:'자유일정 포함',
- risk:'최소 6명(예약 0명)·1월 비',riskLv:'warn',certain:false,
- sc:{social:3,nature:3,sea:4,cost:5,rest:4}},
-{id:'pq',name:'푸꾸옥 3박 5일',short:'푸꾸옥',emoji:'🏝️',color:'#e0623f',kind:'패키지 · 바다 휴양',page:'packages.html',
- price:1049900,priceLabel:'105.0만원',priceNote:'표시가 · 노옵션·노팁 표기',est:'105만원 + 용돈',estLo:1049900,
- dep:'김해',ret:'1/20(수) 06:30 새벽 도착',days:2,dawn:true,local:3.5,
- core:'혼똔섬 케이블카·호핑·스노클링·야간공연',free:'휴양 중심, 여유',
- risk:'잔여 0석 대기예약',riskLv:'bad',certain:false,
- sc:{social:3,nature:2,sea:5,cost:3,rest:5}}
+{id:'yn',name:'운남 5박 6일',short:'운남',emoji:'🏔️',color:'#5b5bd6',kind:'패키지 · 풍경·문화',page:'packages.html#yn',
+ price:949900,priceLabel:'95.0만원',priceNote:'필수 가이드·기사 $60 별도 / 선택관광 별도',est:'약 103.7만원+선택관광 (1$=1,450원 가정)',estLo:1036900,
+ dep:'대구 1/16 밤',ret:'1/21(목) 20:15 귀국',days:4,dawn:false,local:4.5,shop:'2회',mandatory:'$60',single:'15만원',
+ core:'여강고성·호도협·옥룡설산·인상여강쇼',free:'일정 중심 · 장거리 이동',
+ risk:'중국 2027 입국요건·최소 6명·고산',riskLv:'bad',certain:false,
+ sc:{social:2,nature:5,sea:1,cost:2,rest:1}},
+{id:'dn',name:'모두투어 다낭 3박 5일',short:'모두 다낭',emoji:'🌴',color:'#0e9384',kind:'패키지 · 관광+휴식',page:'packages.html#dn',
+ price:789900,priceLabel:'79.0만원',priceNote:'노옵션 / 쇼핑 2회 / 가이드 경비 포함',est:'79만원+개인경비',estLo:789900,
+ dep:'김해 1/16 아침',ret:'1/20(수) 06:50 귀국',days:2,dawn:true,local:3.5,shop:'2회',mandatory:'없음',single:'15만원',
+ core:'바나힐·호이안·스파·한강유람선',free:'2일차 오전 자유일정',
+ risk:'최소 6명·스파 횟수 확인',riskLv:'warn',certain:false,
+ sc:{social:4,nature:3,sea:3,cost:5,rest:4}},
+{id:'pq',name:'푸꾸옥 3박 5일',short:'푸꾸옥',emoji:'🏝️',color:'#e0623f',kind:'패키지 · 해양 체험',page:'packages.html#pq',
+ price:1049900,priceLabel:'105.0만원',priceNote:'노옵션 / 쇼핑 2회 표기(목록 불일치) / 마사지 팁 별도',est:'105만원+매너팁·개인경비',estLo:1049900,
+ dep:'김해 1/16 아침',ret:'1/20(수) 06:30 귀국',days:2,dawn:true,local:3.5,shop:'2회 표기',mandatory:'없음',single:'문의',
+ core:'혼똔섬·호핑·키스오브더씨·선셋타운',free:'활동 중심 · 해상 날씨 변수',
+ risk:'잔여 0석·쇼핑 횟수 확인',riskLv:'bad',certain:false,
+ sc:{social:3,nature:3,sea:5,cost:2,rest:3}}
 ];
 const PRI=[['social','🍶 5명이 함께 먹고 마시기'],['nature','🏞 압도적인 자연경관'],['sea','🏖 따뜻한 바다'],['cost','💰 비용 최소화'],['rest','😌 피곤하지 않게']];
 const DAYS=[[2,'2일(월·화)'],[3,'3일(월~수)'],[4,'4일(월~목)']];
@@ -276,9 +276,12 @@ const ROWS=[
  ['귀국',c=>c.ret],
  ['평일 사용일',c=>dayText(c),'min',c=>c.days+(c.dawn?.5:0)],
  ['현지 체류(추정)',c=>'약 '+c.local+'일','max',c=>c.local],
+ ['쇼핑 횟수',c=>c.shop||'기존 자료 참고'],
+ ['필수 현지경비',c=>c.mandatory||'기존 자료 참고'],
+ ['1인실 추가',c=>c.single||'별도 확인'],
  ['핵심 경험',c=>c.core],
  ['5명만의 시간',c=>c.free],
- ['출발 확실성',c=>c.certain?'우리가 정하면 출발':'여행사·정책에 달림','bool',c=>c.certain],
+ ['출발 확실성',c=>c.certain?'우리가 정하면 출발':'출발 여부 확인 필요','bool',c=>c.certain],
  ['핵심 리스크',c=>c.risk]
 ];
 function best(key,fn){const v=C.map(fn);if(key==='bool')return v.map(x=>x===true);const t=key==='min'?Math.min(...v):Math.max(...v);return v.map(x=>x===t)}
@@ -304,7 +307,7 @@ function rankC(){
   }).sort((a,b)=>(a.out-b.out)||(b.s-a.s));
 }
 function drawRank(){
-  const m=['🥇','🥈','🥉','4','5','6'];
+  const m=['🥇','🥈','🥉','4','5','6','7'];
   $('#ranks').innerHTML=rankC().map((r,i)=>`<div class="rank ${r.out?'out':''}"><div class="n">${r.out?'–':m[i]}</div>
     <div><div class="nm">${r.c.emoji} ${esc(r.c.name)}</div><div class="why">${r.out?'제외: '+esc(r.reasons.join(', ')):esc(r.c.core)}</div>
     <div class="track"><div class="fill" style="width:${r.s}%;background:${r.c.color}"></div></div></div><div class="sc">${r.s.toFixed(0)}점</div></div>`).join('');
@@ -337,7 +340,7 @@ document.addEventListener('click',e=>{
     copyText(`🗳 겨울여행 투표 (${$('#voter').value.trim()||'익명'})\n1순위: ${nm(f)}\n2순위: ${s?nm(s):'-'}\n절대 싫음: ${val('no')?nm(val('no')):'없음'}\n한마디: ${$('#memo').value.trim()||'-'}`);
   }
   if(b.id==='copyAll'){
-    copyText('✈️ 2027 겨울여행 후보 6개 (1인, 1/16 출발)\n'+C.map(c=>`${c.emoji} ${c.name}: ${c.est} · ${c.ret} · 평일 ${dayText(c)} · ⚠ ${c.risk}`).join('\n')+'\n\n※ 시코쿠는 계획서 추정치, 패키지는 모두투어 표시가 기준(2026.11.22)');
+    copyText('✈️ 2027 겨울여행 후보 6개 (1인, 1/16 출발)\n'+C.map(c=>`${c.emoji} ${c.name}: ${c.est} · ${c.ret} · 평일 ${dayText(c)} · ⚠ ${c.risk}`).join('\n')+'\n\n※ 시코쿠·장가계는 기존 허브 추정치, 3개 패키지는 여행사 PDF 기준(2026.11.22)');
   }
 });
 drawQ();drawRank();paint();
